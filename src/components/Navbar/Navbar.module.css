@@ -1,0 +1,118 @@
+.navbar {
+    background-color: var(--bga);  
+    box-shadow:rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    height: 80px;
+    position: relative;
+}
+  
+.navbarContainer {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    padding: 1rem;
+}
+  
+.logo img {
+    height: 60px;
+}
+  
+.hamburgerWrapper {
+    cursor: pointer;
+    display: block;
+}
+  
+.navbarElements {
+    background-color: rgb(114, 103, 97);
+    box-shadow:rgba(0, 0, 0, 0.19) 0px 10px 20px,rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 80px;
+    transition: max-height 0.3s ease-in-out;
+    width: 100%;
+    z-index: 1000;
+}
+  
+.navbarElements.menuOpen  {
+    max-height: calc(100vh - 80px);
+}
+
+.navbarElements ul {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin-top: 3rem;
+    padding: 0;
+}
+  
+.navbarElements ul li {
+    margin-bottom: 3rem;
+}
+
+.navbarElements ul a {
+    color: var(--accent);
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: color 0.3s ease-out;
+}
+  
+.navbarElements ul a.active {
+    color: #fff;
+    font-weight: 500;
+    position: relative;
+}
+  
+.navbarElements ul a.active::after {
+    background-color: #fff;
+    bottom: -4px;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .navbarContainer {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 1200px;
+    }
+
+    .hamburgerWrapper {
+        display: none;
+    }
+
+    .navbarElements {
+        background-color: unset;
+        box-shadow: none;
+        flex-direction: row;  
+        max-height: none;
+        overflow: visible;
+        position: relative;
+        right: auto;
+        top: auto;
+        transition: none;
+        width: auto;
+        z-index: auto;
+    }
+  
+    .navbarElements ul {
+        flex-direction: row;
+    }
+  
+    .navbarElements ul,
+    .navbarElements ul li {
+        margin: 0;
+    }
+} 
