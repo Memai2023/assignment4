@@ -55,7 +55,7 @@ const AnimalDetail = () => {
                             to={`${generateLink(category, animal)}/details`}
                             onClick={() => handleLinkClick(category)}
                         >
-                            Read More...
+                            More info...
                         </NavLink>
                     </div>
                 </div>
