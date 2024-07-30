@@ -1,13 +1,13 @@
-import { Routes, Route } from 'react-router-dom';
-import Layout from './pages/Layout';
-import Home from './pages/Home';
-import Birds from './pages/Birds';
-import Mammals from './pages/Mammals';
-import Reptiles from './pages/Reptiles';
-import AnimalSummary from './pages/AnimalSummary';
-import AnimalDetail from './pages/AnimalDetail';
-import { welcomeContent } from './data/data';
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import Birds from "./pages/Birds";
+import Mammals from "./pages/Mammals";
+import Reptiles from "./pages/Reptiles";
+import AnimalSummary from "./pages/AnimalSummary";
+import AnimalDetail from "./pages/AnimalDetail";
+import { welcomeContent } from "./data/data";
+import "./App.css";
 
 function App() {
     return (
@@ -59,7 +59,7 @@ function App() {
                         }
                     />
                     <Route
-                        path=":category/:animalName"
+                        path=":species"
                         element={
                             <AnimalSummary
                                 title={"Animal Summary"}
@@ -67,7 +67,7 @@ function App() {
                         }
                     />
                     <Route
-                        path=":category/:animalName/details"
+                        path=":category/:species"
                         element={
                             <AnimalDetail
                                 title={"Animal Details"}

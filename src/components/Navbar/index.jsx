@@ -1,18 +1,17 @@
 import { useState, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Squash as Hamburger } from 'hamburger-react';
-import {useClickAway} from 'react-use';
-import styles from './Navbar.module.css';
+import { NavLink } from "react-router-dom";
+import { Squash as Hamburger } from "hamburger-react";
+import {useClickAway} from "react-use";
+import styles from "./Navbar.module.css";
 
-const Navbar = ({ category, setCategory }) => {
+const Navbar = ({ category }) => {
     const [isOpen, setOpen] = useState(false)
     const ref = useRef(null);
- 
+
     useClickAway(ref, () => setOpen(false));
 
-    const handleLinkClick = (category) => {
+    const handleLinkClick = () => {
         setOpen(false);
-        setCategory(category);
     }
 
     return (
@@ -43,7 +42,7 @@ const Navbar = ({ category, setCategory }) => {
                         <li>
                             <NavLink
                                 className={ category === '/' ? styles.active : ''}
-                                onClick={() => handleLinkClick('/')}
+                                onClick={() => handleLinkClick()}
                                 to="/"
                             >
                                 Home
@@ -52,7 +51,7 @@ const Navbar = ({ category, setCategory }) => {
                         <li>
                             <NavLink
                                 className={ category === 'birds' ? styles.active : ''}
-                                onClick={() => handleLinkClick('birds')}
+                                onClick={() => handleLinkClick()}
                                 to="birds"
                             >
                                 Birds
@@ -61,7 +60,7 @@ const Navbar = ({ category, setCategory }) => {
                         <li>
                             <NavLink
                                 className={ category === 'mammals' ? styles.active : ''}
-                                onClick={() => handleLinkClick('mammals')}
+                                onClick={() => handleLinkClick()}
                                 to="mammals"
                             >
                                 Mammals
@@ -70,7 +69,7 @@ const Navbar = ({ category, setCategory }) => {
                         <li>
                             <NavLink
                                 className={ category === 'reptiles' ? styles.active : ''}
-                                onClick={() => handleLinkClick('reptiles')}
+                                onClick={() => handleLinkClick()}
                                 to="reptiles"
                             >
                                 Reptiles

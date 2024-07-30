@@ -1,27 +1,27 @@
 import { useParams, NavLink, useOutletContext } from "react-router-dom";
 import { animals } from "../../data/data";
-import 'react-responsive-modal/styles.css';
-import styles from './AnimalSummary.module.css';
+import "react-responsive-modal/styles.css";
+import styles from "./AnimalSummary.module.css";
 
-const AnimalDetail = () => {
-    const { category, animalName } = useParams();
-    const { setCategory } = useOutletContext();
-    
-    const animal = animals[category]?.find(
-        (animal) => animal.slug === animalName
-    );
+const AnimalSummary = () => {
+    const { species } = useParams();
+     let matchedAnimal = null;
+
+    if (species) {
+        const allAnimals = Object.values(animals).flat();
+        matchedAnimal = allAnimals.find(animal => animal.slug === species)
+    }
 
     const handleLinkClick = () => {
-        setCategory(category);
         window.scrollTo(0, 0);
     };
 
     const generateLink = (cat, animal) => {
-        const animalURL = `${cat}/${animal.name.replace(/\s+/g, '-').toLowerCase()}`;
+        const animalURL = `${cat.toLowerCase()}/${animal}`;
         return `/${animalURL}`;
     };
 
-    if (!animal) {
+    if (!matchedAnimal) {
         return <div>Animal not found!</div>;
     }
 
@@ -29,31 +29,31 @@ const AnimalDetail = () => {
         <div className={styles.animalSummaryContainer}>
             <div className={`${styles.container} ${styles.left}`}>
                 <div className={styles.box}>
-                    <img src={animal.image} alt={animal.name}/>
-                    <h2>{`${animal.name}`} </h2>
+                    <img src={matchedAnimal.image} alt={matchedAnimal.name}/>
+                    <h2>{`${matchedAnimal.name}`} </h2>
                 </div>
             </div>
             <div className={`${styles.container} ${styles.right}`}>
                 <div className={styles.box}>
                     <p>
-                        <b>Lifespan: </b>{animal.lifespan}<br/>
+                        <b>Lifespan: </b>{matchedAnimal.lifespan}<br/>
                         <b>Group: </b>
                             <NavLink
-                                to={`/${category}`}
-                                onClick={() => handleLinkClick(category)}
+                                to={`/${matchedAnimal.group.toLowerCase()}`}
+                                onClick={() => handleLinkClick()}
                                 className={styles.grouplink}
                             >
-                                {animal.group}
+                                {matchedAnimal.group}
                             </NavLink><br/>
-                        <b>Food: </b>{animal.food}
+                        <b>Food: </b>{matchedAnimal.food}
                     </p>
                 </div>
                 <div className={styles.box}>
-                    <p>{animal.summary}</p>
+                    <p>{matchedAnimal.summary}</p>
                     <div className={styles.readMore}>
                         <NavLink
-                            to={`${generateLink(category, animal)}/details`}
-                            onClick={() => handleLinkClick(category)}
+                            to={`${generateLink(matchedAnimal.group, matchedAnimal.slug)}`}
+                            onClick={() => handleLinkClick()}
                         >
                             More info...
                         </NavLink>
@@ -64,4 +64,4 @@ const AnimalDetail = () => {
     );
 };
 
-export default AnimalDetail;
+export default AnimalSummary;

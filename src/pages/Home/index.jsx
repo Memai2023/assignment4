@@ -1,4 +1,4 @@
-import MainContent from '../../components/MainContent';
+import MainContent from "../../components/MainContent";
 
 const Home = ({title, text1, text2, image}) => {
     return (

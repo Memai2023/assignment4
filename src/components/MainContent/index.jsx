@@ -1,4 +1,4 @@
-import styles from './MainContent.module.css';
+import styles from "./MainContent.module.css";
 
 const MainContent = ({pageTitle, text1, text2, image}) => {
     return (

@@ -1,25 +1,17 @@
 import React, {useState} from "react";
-import { useParams, NavLink, useOutletContext } from "react-router-dom";
-import { Modal } from 'react-responsive-modal';
+import { useParams, NavLink } from "react-router-dom";
+import { Modal } from "react-responsive-modal";
 import { animals } from "../../data/data";
-import 'react-responsive-modal/styles.css';
-import styles from './AnimalDetail.module.css';
+import "react-responsive-modal/styles.css";
+import styles from "./AnimalDetail.module.css";
 
 const AnimalDetail = () => {
-    const { category, animalName } = useParams();
-    const { setCategory } = useOutletContext();
-    
+    const { category, species } = useParams();
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
-    
-    const animal = animals[category]?.find(
-        (animal) => animal.slug === animalName
-    );
-
-    const handleLinkClick = () => {
-        setCategory(category);
-    }
+    const animal = animals[category]?.find((animal) => animal.slug === species);
+    const handleLinkClick = () => { window.scrollTo(0, 0); }
 
     if (!animal) {
         return <div>Animal not found!</div>;

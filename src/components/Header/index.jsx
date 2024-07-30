@@ -1,11 +1,8 @@
-import Navbar from '../Navbar';
+import Navbar from "../Navbar";
 
-const Header = ({ category, setCategory }) => {
+const Header = ({ category }) => {
     return (
-        <Navbar
-            category={category}
-            setCategory={setCategory}
-        />
+        <Navbar category={category} />
     );
 }
 

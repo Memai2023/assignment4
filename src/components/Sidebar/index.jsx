@@ -1,11 +1,11 @@
-import { React, useEffect, useState, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
-import { animals } from '../../data/data.js';
-import { Squash as Hamburger } from 'hamburger-react';
-import { useClickAway } from 'react-use';
-import styles from './Sidebar.module.css';
+import { React, useEffect, useState, useRef } from "react";
+import { NavLink } from "react-router-dom";
+import { animals } from "../../data/data.js";
+import { Squash as Hamburger } from "hamburger-react";
+import { useClickAway } from "react-use";
+import styles from "./Sidebar.module.css";
 
-const Sidebar = ({currentPage, category}) => {
+const Sidebar = ( {category, species }) => {
     let animalsToDisplay;
 
     const [clickedAnimal, setClickedAnimal] = useState(null);
@@ -14,24 +14,26 @@ const Sidebar = ({currentPage, category}) => {
     
     useClickAway(ref, () => setOpen(false));
     
-    const generateLink = (cat, animal) => {
-        const animalURL = `${cat}/${animal.slug}`;
-        const animalDetailURL = animalURL + '/details'
+    const generateLink = (spec) => {
 
-        if (currentPage === animalURL) {
-            return `/`;
-        } else if (currentPage === animalDetailURL) {
-            return `/${cat}`;
-        } else if (category === '/') {
-            return `/${animalURL}`;
+        if (category === '/') {
+            if (species === spec.slug) {
+                return '/';
+            } else {
+                return `/${spec.slug}`;
+            }
         }
         else {
-            return `/${animalURL}/details`;
+            if (species === spec.slug) {
+                return `/${category}`;
+            } else {
+                return `/${category}/${spec.slug}`;
+            }
         }
     };
 
     useEffect(() => {
-        if (currentPage === '/') {
+        if (species === '/') {
             setClickedAnimal(null);
         }
     })
@@ -45,8 +47,8 @@ const Sidebar = ({currentPage, category}) => {
                         <ul>{animalsList.map((animal, index) => (
                                 <li key={index}>
                                     <NavLink
-                                        to={generateLink(category,animal)}
-                                        className={clickedAnimal === animal.name ? styles.active : ''}
+                                        to={generateLink(animal)}
+                                        className={species === animal.slug ? styles.active : ''}
                                         onClick={() => {setClickedAnimal(clickedAnimal === animal.name ? null : animal.name); setOpen(false)} }
                                     >
                                         {animal.name}
@@ -66,7 +68,7 @@ const Sidebar = ({currentPage, category}) => {
                     {animals[category].map((animal, index) => (
                         <li key={index}>
                             <NavLink
-                                to={`${generateLink(category, animal)}`}
+                                to={`${generateLink(animal)}`}
                                 className={({ isActive }) => (isActive ? styles.active : '')}
                                 onClick={() => {setClickedAnimal(clickedAnimal === animal.name ? null : animal.name); setOpen(false)} }
                             >
